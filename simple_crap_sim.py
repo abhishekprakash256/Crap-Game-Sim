@@ -11,6 +11,7 @@ def roll_dice():
 	return random.randint(1, 6)
 
 
+
 class Game:
 
 	def __init__(self):
@@ -31,7 +32,7 @@ class Game:
 
 
 
-	def come_out_game_rules(self,two_dice_roll, active = True):
+	def come_out_game_rules(self,two_dice_roll, active_bet):
 		"""
 		The method to put the game rules 
 		"""
@@ -39,7 +40,7 @@ class Game:
 		#make the sum of dice roll
 		sum_dice_roll = sum(two_dice_roll)
 
-		if active : 
+		if active_bet : 
 
 			if sum_dice_roll in (7,11):
 				return "Won"
@@ -90,20 +91,17 @@ class Game:
 
 
 
-	def play_craps(self):
+	def play_craps(self, pass_line_bet):
 			"""
 			Start the game and run the rules.
 			"""
 			# Start the game with the come-out roll
 
-			#make the bet in don't pass line or pass line 
-			active_bet = False
-
 			come_out = self.two_dice_roll()
 			print(f"Come-Out Roll: {come_out} (Total: {sum(come_out)})")
 
 			# Apply come-out game rules
-			result = self.come_out_game_rules(come_out, active_bet)
+			result = self.come_out_game_rules(come_out, pass_line_bet)
 
 			if result:
 
@@ -119,6 +117,7 @@ class Game:
 
 			# If a point is established
 			print(f"The Point is set to {self.point}")
+
 
 			# Continue with the point game
 			while True:
@@ -136,7 +135,11 @@ class Game:
 if __name__ == "__main__":
 
 	game = Game()
-	print(game.play_craps())
+
+	#set the pass line bet to start the game
+	pass_line_bet = True
+
+	print(game.play_craps(pass_line_bet))
 
 
 
